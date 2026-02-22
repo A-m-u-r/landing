@@ -1,0 +1,160 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { randomBytes } from "node:crypto";
+import {
+  clearLoginFailures,
+  createSessionToken,
+  getLoginLimit,
+  isAdminAuthenticated,
+  markLoginFailure,
+  setSessionCookie,
+  verifyAdminPassword,
+} from "../../lib/admin/auth";
+import { CSRF_COOKIE } from "../../lib/admin/config";
+
+export const prerender = false;
+
+Astro.response.headers.set("cache-control", "no-store");
+
+if (isAdminAuthenticated(Astro.cookies)) {
+  return Astro.redirect("/admin");
+}
+
+let errorText = "";
+
+let csrfToken = Astro.cookies.get(CSRF_COOKIE)?.value;
+if (!csrfToken) {
+  csrfToken = randomBytes(32).toString("hex");
+  Astro.cookies.set(CSRF_COOKIE, csrfToken, {
+    path: "/",
+    httpOnly: false,
+    sameSite: "strict",
+    secure: import.meta.env.PROD,
+    maxAge: 60 * 60 * 12,
+  });
+}
+
+if (Astro.request.method === "POST") {
+  const ip = Astro.clientAddress || "unknown";
+  const limit = getLoginLimit(ip);
+  if (limit.blocked) {
+    errorText = `Слишком много попыток. Повторите через ${limit.retryAfterSec} сек.`;
+  } else {
+    const form = await Astro.request.formData();
+    const password = String(form.get("password") || "");
+    const formCsrf = String(form.get("csrf") || "");
+    const cookieCsrf = Astro.cookies.get(CSRF_COOKIE)?.value || "";
+
+    if (!password) {
+      errorText = "Введите пароль.";
+    } else if (!formCsrf || !cookieCsrf || formCsrf !== cookieCsrf) {
+      errorText = "Неверный CSRF токен.";
+    } else {
+      try {
+        if (!verifyAdminPassword(password)) {
+          markLoginFailure(ip);
+          errorText = "Неверный пароль.";
+        } else {
+          clearLoginFailures(ip);
+          setSessionCookie(Astro.cookies, createSessionToken());
+          return Astro.redirect("/admin");
+        }
+      } catch {
+        errorText = "Сервер админки не настроен.";
+      }
+    }
+  }
+}
+---
+
+<BaseLayout title="Вход в админку">
+  <main class="login-page">
+    <section class="section login-section">
+      <div class="container login-wrap">
+        <article class="card login-card">
+          <h1>Вход в админку</h1>
+          <p>Для доступа к управлению контентом введите пароль администратора.</p>
+
+          <form class="login-form" method="POST" autocomplete="off">
+            <input type="hidden" name="csrf" value={csrfToken} />
+            <label>
+              Пароль
+              <input
+                id="password"
+                name="password"
+                type="password"
+                minlength="8"
+                maxlength="200"
+                required
+                autofocus />
+            </label>
+            <button class="button primary" type="submit">Войти</button>
+          </form>
+
+          <p id="errorBox" class="error-text" role="alert" aria-live="polite">{errorText}</p>
+        </article>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .login-page {
+    min-height: 100dvh;
+    display: grid;
+    align-items: center;
+  }
+
+  .login-section {
+    width: 100%;
+  }
+
+  .login-wrap {
+    display: grid;
+    place-items: center;
+  }
+
+  .login-card {
+    width: min(100%, 460px);
+    padding: 30px;
+  }
+
+  .login-card h1 {
+    margin: 0 0 10px;
+    font-family: "Fraunces", serif;
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .login-card p {
+    margin: 0 0 16px;
+    color: var(--muted);
+  }
+
+  .login-form {
+    display: grid;
+    gap: 12px;
+  }
+
+  .login-form label {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+  }
+
+  .login-form input {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(28, 28, 26, 0.18);
+    padding: 11px 12px;
+    font: inherit;
+    background: #fff;
+  }
+
+  .error-text {
+    min-height: 20px;
+    margin-top: 12px;
+    color: #b42318;
+    font-weight: 500;
+  }
+</style>

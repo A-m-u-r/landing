@@ -17,6 +17,12 @@ pnpm-debug.log*
 .env
 .env.production
 
+# admin runtime data
+storage/
+public/uploads/
+.devserver.log
+.tmp-*
+
 # macOS-specific files
 .DS_Store
 
