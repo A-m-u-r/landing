@@ -1,0 +1,47 @@
+---
+import SectionTitle from "../components/SectionTitle.astro";
+import { site } from "../data/site";
+---
+<section class="section" id="about">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Обо мне"
+      title={`Почему выбирают ${site.brand}`}
+      text="Сочетание тактичности, режиссуры и живого диалога с гостями."
+    />
+    <div class="about-grid">
+      <div class="card reveal">
+        <h3>Интеллигентная подача</h3>
+        <p>
+          Без навязчивости и громких конкурсов. Все интерактивы — по месту и настроению.
+        </p>
+      </div>
+      <div class="card reveal">
+        <h3>Режиссура момента</h3>
+        <p>
+          История вечера строится вокруг вас: от вступления до финального акцента.
+        </p>
+      </div>
+      <div class="card reveal">
+        <h3>Сохранение тайминга</h3>
+        <p>
+          Веду событие уверенно, без суеты, учитывая работу команды и расписание.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .about-grid h3 {
+    margin-top: 0;
+  }
+  .about-grid p {
+    color: var(--muted);
+  }
+</style>

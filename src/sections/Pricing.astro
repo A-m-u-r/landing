@@ -1,0 +1,52 @@
+---
+import SectionTitle from "../components/SectionTitle.astro";
+import { site } from "../data/site";
+---
+<section class="section" id="pricing">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Пакеты"
+      title="Гибкие форматы под ваш запрос"
+      text="Точные условия обсуждаем индивидуально после брифа." />
+    <div class="pricing-grid">
+      {site.pricing.map((plan) => (
+        <div class="card pricing-card reveal">
+          <h3>{plan.title}</h3>
+          <p class="price">{plan.price}</p>
+          <ul>
+            {plan.points.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
+          <a class="button secondary" href="#contact">Запросить расчет</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 24px;
+    color: var(--muted);
+    display: grid;
+    gap: 8px;
+  }
+  .pricing-card ul li::before {
+    content: "• ";
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .price {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+  }
+</style>

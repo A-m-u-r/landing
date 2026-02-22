@@ -1,17 +1,74 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../sections/Hero.astro";
+import About from "../sections/About.astro";
+import Services from "../sections/Services.astro";
+import Showreel from "../sections/Showreel.astro";
+import Testimonials from "../sections/Testimonials.astro";
+import Process from "../sections/Process.astro";
+import Pricing from "../sections/Pricing.astro";
+import FAQ from "../sections/FAQ.astro";
+import Contact from "../sections/Contact.astro";
+import Footer from "../sections/Footer.astro";
+import { site } from "../data/site";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Ведущая событий">
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#hero">{site.brand}</a>
+      <nav>
+        <a href="#services">Форматы</a>
+        <a href="#showreel">Шоу?рил</a>
+        <a href="#process">Процесс</a>
+        <a href="#contact" class="button secondary">Связаться</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Showreel />
+    <Testimonials />
+    <Process />
+    <Pricing />
+    <FAQ />
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    background: rgba(246, 243, 239, 0.8);
+    border-bottom: 1px solid rgba(28, 28, 26, 0.08);
+  }
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+  }
+  .brand {
+    font-weight: 700;
+  }
+  nav {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+  nav a {
+    font-weight: 600;
+  }
+  @media (max-width: 760px) {
+    nav a:not(.button) {
+      display: none;
+    }
+  }
+</style>

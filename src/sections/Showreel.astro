@@ -1,0 +1,55 @@
+---
+import SectionTitle from "../components/SectionTitle.astro";
+---
+<section class="section showreel" id="showreel">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Шоу?рил"
+      title="Сцены, эмоции, атмосфера"
+      text="Добавьте ссылку на ваш видео?ролик или Instagram/YouTube."
+    />
+    <div class="reel-card reveal">
+      <div class="reel-placeholder">
+        <span>Видео?ролик 16:9</span>
+      </div>
+      <div class="reel-meta">
+        <h3>Динамика, которая держит зал</h3>
+        <p>
+          Видеоролик можно встроить через YouTube или загрузить mp4 в `public/`.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .showreel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 243, 239, 0.4));
+  }
+  .reel-card {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(240px, 1.2fr) 1fr;
+    align-items: center;
+    background: var(--surface);
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+  .reel-placeholder {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    background: linear-gradient(120deg, #f4d1bd, #cde7de);
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+  }
+  .reel-meta p {
+    color: var(--muted);
+  }
+  @media (max-width: 900px) {
+    .reel-card {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

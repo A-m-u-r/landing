@@ -1,0 +1,103 @@
+---
+import Button from "../components/Button.astro";
+import { site } from "../data/site";
+---
+<section class="section hero" id="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="badge">{site.city}</span>
+      <h1 class="display">{site.hero.title}</h1>
+      <p class="lead">{site.hero.subtitle}</p>
+      <div class="hero-actions">
+        <Button href="#contact" variant="primary">{site.hero.ctaPrimary}</Button>
+        <Button href="#showreel" variant="secondary">{site.hero.ctaSecondary}</Button>
+      </div>
+      <div class="stats">
+        {site.stats.map((stat) => (
+          <div class="stat reveal">
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="hero-card">
+        <p class="hero-name">{site.brand}</p>
+        <p class="hero-role">Ведущая событий</p>
+        <div class="hero-tags">
+          <span>Эмоции</span>
+          <span>Сценарий</span>
+          <span>Тактичность</span>
+        </div>
+      </div>
+      <div class="hero-orbit"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: 110px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: center;
+    gap: 48px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0 10px;
+    flex-wrap: wrap;
+  }
+  .hero-visual {
+    position: relative;
+    min-height: 360px;
+  }
+  .hero-card {
+    background: var(--surface);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 2;
+  }
+  .hero-name {
+    font-family: "Fraunces", serif;
+    font-size: 28px;
+    margin: 0 0 6px;
+  }
+  .hero-role {
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+  .hero-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .hero-tags span {
+    padding: 6px 12px;
+    background: rgba(212, 90, 43, 0.12);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .hero-orbit {
+    position: absolute;
+    inset: -30px;
+    border-radius: 50%;
+    border: 1px dashed rgba(15, 89, 89, 0.35);
+    animation: orbit 12s linear infinite;
+  }
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

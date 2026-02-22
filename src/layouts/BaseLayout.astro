@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+
+const { title = "" } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ? `${title} · Ведущая событий` : "Ведущая событий"}</title>
+    <meta
+      name="description"
+      content="Ведущая для свадеб, корпоративов и частных событий. Живые эмоции, точный тайминг и интеллигентная подача."
+    />
+    <meta name="theme-color" content="#f6f3ef" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+    <script src="/reveal.js" defer></script>
+  </body>
+</html>

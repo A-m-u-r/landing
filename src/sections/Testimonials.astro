@@ -1,0 +1,26 @@
+---
+import SectionTitle from "../components/SectionTitle.astro";
+import Testimonial from "../components/Testimonial.astro";
+import { site } from "../data/site";
+---
+<section class="section" id="testimonials">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Отзывы"
+      title="Слова гостей после события"
+      text="Теплые впечатления — лучший показатель качества." />
+    <div class="testimonials-grid">
+      {site.testimonials.map((item) => (
+        <Testimonial name={item.name} text={item.text} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+</style>

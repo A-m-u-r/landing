@@ -1,0 +1,26 @@
+---
+import SectionTitle from "../components/SectionTitle.astro";
+import FAQItem from "../components/FAQItem.astro";
+import { site } from "../data/site";
+---
+<section class="section" id="faq">
+  <div class="container">
+    <SectionTitle
+      eyebrow="FAQ"
+      title="Частые вопросы"
+      text="Если не нашли ответ — напишите, я помогу." />
+    <div class="faq-grid">
+      {site.faqs.map((item) => (
+        <FAQItem q={item.q} a={item.a} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+</style>

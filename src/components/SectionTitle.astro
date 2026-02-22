@@ -1,0 +1,14 @@
+---
+const { eyebrow, title, text } = Astro.props;
+---
+<div class="section-title reveal">
+  {eyebrow && <span class="badge">{eyebrow}</span>}
+  <h2 class="display">{title}</h2>
+  {text && <p class="lead">{text}</p>}
+</div>
+
+<style>
+  .section-title {
+    margin-bottom: 32px;
+  }
+</style>

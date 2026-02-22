@@ -1,43 +1,31 @@
-# Astro Starter Kit: Minimal
+# Landing
 
-```sh
-pnpm create astro@latest -- --template minimal
+Одностраничный лендинг для ведущей. Сбор заявок идет через FormSubmit на `aigul.baimurzina@mail.ru`.
+
+## Структура
+
+```
+src/
+  components/   UI-компоненты
+  sections/     Секции лендинга
+  data/         Контент и списки
+  layouts/      Макеты
+  pages/        Страницы (index, thanks)
+  styles/       Глобальные стили
+public/
+  reveal.js     Скрипт анимации появления
 ```
 
-> рџ§‘вЂЌрџљЂ **Seasoned astronaut?** Delete this file. Have fun!
+## Команды
 
-## рџљЂ Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-в”њв”Ђв”Ђ public/
-в”њв”Ђв”Ђ src/
-в”‚   в””в”Ђв”Ђ pages/
-в”‚       в””в”Ђв”Ђ index.astro
-в””в”Ђв”Ђ package.json
+```
+pnpm install
+pnpm dev
+pnpm build
+pnpm preview
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Форма заявки
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## рџ§ћ Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## рџ‘Ђ Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Форма отправляет данные на FormSubmit. При первом запросе сервис попросит подтвердить email.
+Маршрут успешной отправки: `/thanks`.

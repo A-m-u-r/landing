@@ -1,0 +1,17 @@
+---
+const { title, desc } = Astro.props;
+---
+<div class="card service-card reveal">
+  <h3>{title}</h3>
+  <p>{desc}</p>
+</div>
+
+<style>
+  .service-card h3 {
+    margin: 0 0 12px;
+  }
+  .service-card p {
+    color: var(--muted);
+    margin: 0;
+  }
+</style>

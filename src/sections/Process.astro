@@ -1,0 +1,44 @@
+---
+import SectionTitle from "../components/SectionTitle.astro";
+import { site } from "../data/site";
+---
+<section class="section" id="process">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Процесс"
+      title="Четкий и спокойный путь к событию"
+      text="Все шаги прозрачны, чтобы вы чувствовали уверенность." />
+    <div class="process-grid">
+      {site.process.map((step, idx) => (
+        <div class="card process-card reveal">
+          <span class="process-index">0{idx + 1}</span>
+          <h3>{step.title}</h3>
+          <p>{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .process-card {
+    position: relative;
+    overflow: hidden;
+  }
+  .process-index {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-weight: 700;
+    color: rgba(212, 90, 43, 0.25);
+    font-size: 32px;
+  }
+  .process-card p {
+    color: var(--muted);
+  }
+</style>

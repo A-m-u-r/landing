@@ -1,0 +1,33 @@
+---
+import { site } from "../data/site";
+---
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>{site.brand}</strong>
+      <p>Ведущая событий · {site.city}</p>
+    </div>
+    <div>
+      <a href="#contact">Оставить заявку</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 32px 0 48px;
+    color: var(--muted);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

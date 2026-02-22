@@ -1,0 +1,18 @@
+---
+const { name, text } = Astro.props;
+---
+<figure class="card testimonial reveal">
+  <blockquote>“{text}”</blockquote>
+  <figcaption>{name}</figcaption>
+</figure>
+
+<style>
+  .testimonial blockquote {
+    margin: 0 0 16px;
+    font-size: 18px;
+  }
+  .testimonial figcaption {
+    font-weight: 600;
+    color: var(--accent-2);
+  }
+</style>

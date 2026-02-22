@@ -1,0 +1,27 @@
+---
+import SectionTitle from "../components/SectionTitle.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import { site } from "../data/site";
+---
+<section class="section" id="services">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Форматы"
+      title="События, в которых я сильна"
+      text="Универсальная программа, но с точной настройкой под формат и аудиторию."
+    />
+    <div class="services-grid">
+      {site.services.map((service) => (
+        <ServiceCard title={service.title} desc={service.desc} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+</style>
