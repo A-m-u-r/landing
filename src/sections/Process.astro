@@ -1,13 +1,13 @@
----
+ï»¿---
 import SectionTitle from "../components/SectionTitle.astro";
 import { site } from "../data/site";
 ---
 <section class="section" id="process">
   <div class="container">
     <SectionTitle
-      eyebrow="Ïðîöåññ"
-      title="×åòêèé è ñïîêîéíûé ïóòü ê ñîáûòèþ"
-      text="Âñå øàãè ïðîçðà÷íû, ÷òîáû âû ÷óâñòâîâàëè óâåðåííîñòü." />
+      eyebrow="ÐŸÑ€Ð¾Ñ†ÐµÑÑ"
+      title="Ð§ÐµÑ‚ÐºÐ¸Ð¹ Ð¸ ÑÐ¿Ð¾ÐºÐ¾Ð¹Ð½Ñ‹Ð¹ Ð¿ÑƒÑ‚ÑŒ Ðº ÑÐ¾Ð±Ñ‹Ñ‚Ð¸ÑŽ"
+      text="Ð’ÑÐµ ÑˆÐ°Ð³Ð¸ Ð¿Ñ€Ð¾Ð·Ñ€Ð°Ñ‡Ð½Ñ‹, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð²Ñ‹ Ñ‡ÑƒÐ²ÑÑ‚Ð²Ð¾Ð²Ð°Ð»Ð¸ ÑƒÐ²ÐµÑ€ÐµÐ½Ð½Ð¾ÑÑ‚ÑŒ." />
     <div class="process-grid">
       {site.process.map((step, idx) => (
         <div class="card process-card reveal">
@@ -42,3 +42,4 @@ import { site } from "../data/site";
     color: var(--muted);
   }
 </style>
+

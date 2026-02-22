@@ -1,4 +1,4 @@
-const items = document.querySelectorAll(".reveal");
+﻿const items = document.querySelectorAll(".reveal");
 
 if (items.length > 0) {
   const observer = new IntersectionObserver(
@@ -15,3 +15,4 @@ if (items.length > 0) {
 
   items.forEach((item) => observer.observe(item));
 }
+

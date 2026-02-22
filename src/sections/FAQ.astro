@@ -1,4 +1,4 @@
----
+ï»¿---
 import SectionTitle from "../components/SectionTitle.astro";
 import FAQItem from "../components/FAQItem.astro";
 import { site } from "../data/site";
@@ -7,8 +7,8 @@ import { site } from "../data/site";
   <div class="container">
     <SectionTitle
       eyebrow="FAQ"
-      title="×àñòûå âîïðîñû"
-      text="Åñëè íå íàøëè îòâåò — íàïèøèòå, ÿ ïîìîãó." />
+      title="Ð§Ð°ÑÑ‚Ñ‹Ðµ Ð²Ð¾Ð¿Ñ€Ð¾ÑÑ‹"
+      text="Ð•ÑÐ»Ð¸ Ð½Ðµ Ð½Ð°ÑˆÐ»Ð¸ Ð¾Ñ‚Ð²ÐµÑ‚ â€” Ð½Ð°Ð¿Ð¸ÑˆÐ¸Ñ‚Ðµ, Ñ Ð¿Ð¾Ð¼Ð¾Ð³Ñƒ." />
     <div class="faq-grid">
       {site.faqs.map((item) => (
         <FAQItem q={item.q} a={item.a} />
@@ -24,3 +24,4 @@ import { site } from "../data/site";
     gap: 16px;
   }
 </style>
+

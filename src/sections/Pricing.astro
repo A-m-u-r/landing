@@ -1,13 +1,13 @@
----
+п»ї---
 import SectionTitle from "../components/SectionTitle.astro";
 import { site } from "../data/site";
 ---
 <section class="section" id="pricing">
   <div class="container">
     <SectionTitle
-      eyebrow="Пакеты"
-      title="Гибкие форматы под ваш запрос"
-      text="Точные условия обсуждаем индивидуально после брифа." />
+      eyebrow="РџР°РєРµС‚С‹"
+      title="Р“РёР±РєРёРµ С„РѕСЂРјР°С‚С‹ РїРѕРґ РІР°С€ Р·Р°РїСЂРѕСЃ"
+      text="РўРѕС‡РЅС‹Рµ СѓСЃР»РѕРІРёСЏ РѕР±СЃСѓР¶РґР°РµРј РёРЅРґРёРІРёРґСѓР°Р»СЊРЅРѕ РїРѕСЃР»Рµ Р±СЂРёС„Р°." />
     <div class="pricing-grid">
       {site.pricing.map((plan) => (
         <div class="card pricing-card reveal">
@@ -18,7 +18,7 @@ import { site } from "../data/site";
               <li>{point}</li>
             ))}
           </ul>
-          <a class="button secondary" href="#contact">Запросить расчет</a>
+          <a class="button secondary" href="#contact">Р—Р°РїСЂРѕСЃРёС‚СЊ СЂР°СЃС‡РµС‚</a>
         </div>
       ))}
     </div>
@@ -40,7 +40,7 @@ import { site } from "../data/site";
     gap: 8px;
   }
   .pricing-card ul li::before {
-    content: "• ";
+    content: "вЂў ";
     color: var(--accent);
     font-weight: 700;
   }
@@ -50,3 +50,4 @@ import { site } from "../data/site";
     margin: 0;
   }
 </style>
+

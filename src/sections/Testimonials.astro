@@ -1,4 +1,4 @@
----
+ï»¿---
 import SectionTitle from "../components/SectionTitle.astro";
 import Testimonial from "../components/Testimonial.astro";
 import { site } from "../data/site";
@@ -6,9 +6,9 @@ import { site } from "../data/site";
 <section class="section" id="testimonials">
   <div class="container">
     <SectionTitle
-      eyebrow="Îòçûâû"
-      title="Ñëîâà ãîñòåé ïîñëå ñîáûòèÿ"
-      text="Òåïëûå âïå÷àòëåíèÿ — ëó÷øèé ïîêàçàòåëü êà÷åñòâà." />
+      eyebrow="ÐžÑ‚Ð·Ñ‹Ð²Ñ‹"
+      title="Ð¡Ð»Ð¾Ð²Ð° Ð³Ð¾ÑÑ‚ÐµÐ¹ Ð¿Ð¾ÑÐ»Ðµ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ"
+      text="Ð¢ÐµÐ¿Ð»Ñ‹Ðµ Ð²Ð¿ÐµÑ‡Ð°Ñ‚Ð»ÐµÐ½Ð¸Ñ â€” Ð»ÑƒÑ‡ÑˆÐ¸Ð¹ Ð¿Ð¾ÐºÐ°Ð·Ð°Ñ‚ÐµÐ»ÑŒ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð°." />
     <div class="testimonials-grid">
       {site.testimonials.map((item) => (
         <Testimonial name={item.name} text={item.text} />
@@ -24,3 +24,4 @@ import { site } from "../data/site";
     gap: 24px;
   }
 </style>
+

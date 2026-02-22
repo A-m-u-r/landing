@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "landing",
   "type": "module",
   "version": "0.0.1",
@@ -12,3 +12,4 @@
     "astro": "^5.17.1"
   }
 }
+
