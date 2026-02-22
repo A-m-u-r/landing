@@ -2,16 +2,29 @@
 import SectionTitle from "../components/SectionTitle.astro";
 import Testimonial from "../components/Testimonial.astro";
 import { site } from "../data/site";
+
+const { reviews = [] } = Astro.props;
+const display = reviews.length
+  ? reviews.map((item) => ({
+      name: item.subtitle ? `${item.author}, ${item.subtitle}` : item.author,
+      text: item.text,
+      rating: item.rating,
+    }))
+  : site.testimonials.map((item) => ({
+      name: item.name,
+      text: item.text,
+      rating: 5,
+    }));
 ---
 <section class="section" id="testimonials">
   <div class="container">
     <SectionTitle
       eyebrow="Отзывы"
       title="Слова гостей после события"
-      text="Теплые впечатления — лучший показатель качества." />
+      text={reviews.length ? "Отзывы загружаются из админки в реальном времени." : "Теплые впечатления — лучший показатель качества."} />
     <div class="testimonials-grid">
-      {site.testimonials.map((item) => (
-        <Testimonial name={item.name} text={item.text} />
+      {display.map((item) => (
+        <Testimonial name={item.name} text={item.text} rating={item.rating} />
       ))}
     </div>
   </div>

@@ -1,12 +1,22 @@
 ﻿---
-const { name, text } = Astro.props;
+const { name, text, rating = 5 } = Astro.props;
+const stars = `${"★".repeat(Math.max(1, Math.min(5, Number(rating) || 5)))}${"☆".repeat(
+  5 - Math.max(1, Math.min(5, Number(rating) || 5)),
+)}`;
 ---
 <figure class="card testimonial reveal">
+  <div class="stars" aria-hidden="true">{stars}</div>
   <blockquote>“{text}”</blockquote>
   <figcaption>{name}</figcaption>
 </figure>
 
 <style>
+  .testimonial .stars {
+    color: #f79009;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
   .testimonial blockquote {
     margin: 0 0 16px;
     font-size: 18px;

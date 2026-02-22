@@ -11,6 +11,9 @@ import FAQ from "../sections/FAQ.astro";
 import Contact from "../sections/Contact.astro";
 import Footer from "../sections/Footer.astro";
 import { site } from "../data/site";
+import { getAdminData } from "../lib/admin/storage";
+
+const adminData = await getAdminData().catch(() => ({ media: [], reviews: [] }));
 ---
 
 <BaseLayout title="Ведущая событий">
@@ -30,8 +33,8 @@ import { site } from "../data/site";
     <Hero />
     <About />
     <Services />
-    <Showreel />
-    <Testimonials />
+    <Showreel media={adminData.media} />
+    <Testimonials reviews={adminData.reviews} />
     <Process />
     <Pricing />
     <FAQ />
