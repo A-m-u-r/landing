@@ -11,6 +11,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.devserver.err.log
+.devserver.out.log
+.tunnel.err.log
+.tunnel.out.log
 
 
 # environment variables
@@ -22,6 +26,7 @@ storage/
 public/uploads/
 .devserver.log
 .tmp-*
+media/
 
 # macOS-specific files
 .DS_Store
