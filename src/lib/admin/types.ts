@@ -19,7 +19,22 @@ export interface AdminReview {
   createdAt: number;
 }
 
+export interface AdminSettings {
+  city: string;
+  socialLabel: string;
+  socialUrl: string;
+  socialText: string;
+}
+
+export interface AdminPricingItem {
+  title: string;
+  price: string;
+  points: string[];
+}
+
 export interface AdminData {
   media: AdminMedia[];
   reviews: AdminReview[];
+  settings: AdminSettings | null;
+  pricing: AdminPricingItem[];
 }

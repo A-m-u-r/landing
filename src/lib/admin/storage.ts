@@ -2,11 +2,13 @@ import { randomUUID } from "node:crypto";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { DATA_FILE, STORAGE_DIR, UPLOADS_DIR } from "./config";
-import type { AdminData, AdminMedia, AdminReview, MediaKind } from "./types";
+import type { AdminData, AdminMedia, AdminPricingItem, AdminReview, AdminSettings, MediaKind } from "./types";
 
 const EMPTY_DATA: AdminData = {
   media: [],
   reviews: [],
+  settings: null,
+  pricing: [],
 };
 
 let writeQueue = Promise.resolve();
@@ -41,14 +43,25 @@ function normalizeData(input: unknown): AdminData {
   if (!input || typeof input !== "object") {
     return { ...EMPTY_DATA };
   }
-  const raw = input as { media?: unknown; reviews?: unknown };
+  const raw = input as {
+    media?: unknown;
+    reviews?: unknown;
+    settings?: unknown;
+    pricing?: unknown;
+  };
   const media = Array.isArray(raw.media)
     ? raw.media.filter((item) => item && typeof item === "object") as AdminMedia[]
     : [];
   const reviews = Array.isArray(raw.reviews)
     ? raw.reviews.filter((item) => item && typeof item === "object") as AdminReview[]
     : [];
-  return { media, reviews };
+  const settings = raw.settings && typeof raw.settings === "object"
+    ? (raw.settings as AdminSettings)
+    : null;
+  const pricing = Array.isArray(raw.pricing)
+    ? raw.pricing.filter((item) => item && typeof item === "object") as AdminPricingItem[]
+    : [];
+  return { media, reviews, settings, pricing };
 }
 
 async function readData() {
@@ -184,6 +197,8 @@ export async function clearAllAdminData() {
     urls.push(...data.media.map((item) => item.url));
     data.media = [];
     data.reviews = [];
+    data.settings = null;
+    data.pricing = [];
   });
 
   await Promise.all(
@@ -195,4 +210,20 @@ export async function clearAllAdminData() {
       }
     }),
   );
+}
+
+export async function updateSettings(settings: AdminSettings) {
+  await withMutableData((data) => {
+    data.settings = { ...settings };
+  });
+}
+
+export async function updatePricing(pricing: AdminPricingItem[]) {
+  await withMutableData((data) => {
+    data.pricing = pricing.map((item) => ({
+      title: item.title,
+      price: item.price,
+      points: [...item.points],
+    }));
+  });
 }
