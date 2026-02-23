@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
 import { ensureCsrfToken, isAdminAuthenticated } from "../lib/admin/auth";
 
 export const prerender = false;
@@ -10,6 +11,13 @@ if (!isAdminAuthenticated(Astro.cookies)) {
 
 Astro.response.headers.set("cache-control", "no-store");
 const csrfToken = ensureCsrfToken(Astro.cookies);
+const defaultSettings = {
+  city: site.city,
+  socialLabel: site.social.label,
+  socialUrl: site.social.url,
+  socialText: site.social.text,
+};
+const defaultPricing = site.pricing;
 ---
 
 <BaseLayout title="Админка">
@@ -31,6 +39,40 @@ const csrfToken = ensureCsrfToken(Astro.cookies);
 
     <section class="section">
       <div class="container admin-grid">
+        <article class="card panel settings">
+          <div class="panel-head">
+            <h2>Настройки</h2>
+          </div>
+          <form id="settingsForm" class="settings-form">
+            <label>
+              География
+              <input id="settingsCity" name="city" type="text" required maxlength="80" />
+            </label>
+            <label>
+              Соцсеть (название)
+              <input id="settingsSocialLabel" name="socialLabel" type="text" required maxlength="24" />
+            </label>
+            <label>
+              Ссылка на соцсеть
+              <input id="settingsSocialUrl" name="socialUrl" type="url" required maxlength="200" />
+            </label>
+            <label>
+              Отображаемый текст
+              <input id="settingsSocialText" name="socialText" type="text" maxlength="120" />
+            </label>
+            <button class="button primary" type="submit">Сохранить настройки</button>
+          </form>
+        </article>
+
+        <article class="card panel pricing-panel">
+          <div class="panel-head">
+            <h2>Пакеты</h2>
+            <button id="addPricingBtn" class="button secondary" type="button">Добавить пакет</button>
+          </div>
+          <div id="pricingList" class="pricing-list"></div>
+          <button id="savePricingBtn" class="button primary" type="button">Сохранить пакеты</button>
+        </article>
+
         <article class="card panel">
           <div class="panel-head">
             <h2>Фото</h2>
@@ -109,7 +151,9 @@ const csrfToken = ensureCsrfToken(Astro.cookies);
 
 <script is:inline>
   const csrfToken = document.getElementById("adminCsrfToken")?.value || "";
-  const state = { media: [], reviews: [] };
+  const defaultSettings = ${JSON.stringify(defaultSettings)};
+  const defaultPricing = ${JSON.stringify(defaultPricing)};
+  const state = { media: [], reviews: [], settings: null, pricing: [] };
 
   const elements = {
     photoInput: document.getElementById("photoInput"),
@@ -120,6 +164,14 @@ const csrfToken = ensureCsrfToken(Astro.cookies);
     videoList: document.getElementById("videoList"),
     reviewForm: document.getElementById("reviewForm"),
     reviewList: document.getElementById("reviewList"),
+    settingsForm: document.getElementById("settingsForm"),
+    settingsCity: document.getElementById("settingsCity"),
+    settingsSocialLabel: document.getElementById("settingsSocialLabel"),
+    settingsSocialUrl: document.getElementById("settingsSocialUrl"),
+    settingsSocialText: document.getElementById("settingsSocialText"),
+    pricingList: document.getElementById("pricingList"),
+    addPricingBtn: document.getElementById("addPricingBtn"),
+    savePricingBtn: document.getElementById("savePricingBtn"),
     exportBtn: document.getElementById("exportBtn"),
     clearBtn: document.getElementById("clearBtn"),
     logoutBtn: document.getElementById("logoutBtn"),
@@ -317,13 +369,108 @@ const csrfToken = ensureCsrfToken(Astro.cookies);
     state.reviews.forEach((item) => elements.reviewList.appendChild(createReviewCard(item)));
   }
 
+  function renderSettings() {
+    const settings = { ...defaultSettings, ...(state.settings || {}) };
+    if (elements.settingsCity) elements.settingsCity.value = settings.city || "";
+    if (elements.settingsSocialLabel) elements.settingsSocialLabel.value = settings.socialLabel || "";
+    if (elements.settingsSocialUrl) elements.settingsSocialUrl.value = settings.socialUrl || "";
+    if (elements.settingsSocialText) elements.settingsSocialText.value = settings.socialText || "";
+  }
+
+  function createPricingRow(item, index) {
+    const wrap = document.createElement("article");
+    wrap.className = "pricing-item";
+    wrap.dataset.index = String(index);
+
+    const titleLabel = document.createElement("label");
+    titleLabel.textContent = "Название";
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.required = true;
+    titleInput.maxLength = 80;
+    titleInput.value = item.title || "";
+    titleInput.className = "pricing-title";
+    titleLabel.appendChild(titleInput);
+
+    const priceLabel = document.createElement("label");
+    priceLabel.textContent = "Цена";
+    const priceInput = document.createElement("input");
+    priceInput.type = "text";
+    priceInput.required = true;
+    priceInput.maxLength = 40;
+    priceInput.value = item.price || "";
+    priceInput.className = "pricing-price";
+    priceLabel.appendChild(priceInput);
+
+    const pointsLabel = document.createElement("label");
+    pointsLabel.textContent = "Что входит (каждый пункт с новой строки)";
+    const pointsInput = document.createElement("textarea");
+    pointsInput.rows = 4;
+    pointsInput.maxLength = 1200;
+    pointsInput.value = Array.isArray(item.points) ? item.points.join("\n") : "";
+    pointsInput.className = "pricing-points";
+    pointsLabel.appendChild(pointsInput);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "text-btn danger";
+    removeBtn.textContent = "Удалить";
+    removeBtn.addEventListener("click", () => {
+      state.pricing.splice(index, 1);
+      renderPricing();
+    });
+
+    const actions = document.createElement("div");
+    actions.className = "pricing-actions";
+    actions.appendChild(removeBtn);
+
+    wrap.append(titleLabel, priceLabel, pointsLabel, actions);
+    return wrap;
+  }
+
+  function renderPricing() {
+    if (!elements.pricingList) return;
+    elements.pricingList.innerHTML = "";
+    if (!state.pricing.length) {
+      const empty = document.createElement("p");
+      empty.className = "empty";
+      empty.textContent = "Пакетов пока нет.";
+      elements.pricingList.appendChild(empty);
+      return;
+    }
+    state.pricing.forEach((item, index) => {
+      elements.pricingList.appendChild(createPricingRow(item, index));
+    });
+  }
+
+  function collectPricingFromForm() {
+    if (!elements.pricingList) return [];
+    const rows = Array.from(elements.pricingList.querySelectorAll(".pricing-item"));
+    return rows.map((row) => {
+      const title = row.querySelector(".pricing-title")?.value || "";
+      const price = row.querySelector(".pricing-price")?.value || "";
+      const pointsRaw = row.querySelector(".pricing-points")?.value || "";
+      const points = pointsRaw
+        .split("\n")
+        .map((item) => item.trim())
+        .filter((item) => item.length > 0);
+      return { title, price, points };
+    });
+  }
+
   async function refresh() {
     const data = await api("/api/admin/content", { method: "GET" });
     state.media = data.media || [];
     state.reviews = data.reviews || [];
+    state.settings = data.settings || null;
+    state.pricing = Array.isArray(data.pricing) && data.pricing.length
+      ? data.pricing
+      : defaultPricing.map((item) => ({ ...item, points: [...(item.points || [])] }));
     updateCounters();
     renderMedia();
     renderReviews();
+    renderSettings();
+    renderPricing();
   }
 
   async function uploadFiles(files, kind) {
@@ -390,6 +537,49 @@ const csrfToken = ensureCsrfToken(Astro.cookies);
         await refresh();
       } catch (error) {
         alert(error.message || "Не удалось добавить отзыв.");
+      }
+    });
+
+    elements.settingsForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const payload = {
+        city: elements.settingsCity?.value || "",
+        socialLabel: elements.settingsSocialLabel?.value || "",
+        socialUrl: elements.settingsSocialUrl?.value || "",
+        socialText: elements.settingsSocialText?.value || "",
+      };
+      try {
+        await api("/api/admin/settings", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        await refresh();
+      } catch (error) {
+        alert(error.message || "Не удалось сохранить настройки.");
+      }
+    });
+
+    elements.addPricingBtn.addEventListener("click", () => {
+      state.pricing.push({ title: "", price: "", points: [] });
+      renderPricing();
+    });
+
+    elements.savePricingBtn.addEventListener("click", async () => {
+      const pricing = collectPricingFromForm();
+      try {
+        await api("/api/admin/pricing", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ pricing }),
+        });
+        await refresh();
+      } catch (error) {
+        alert(error.message || "Не удалось сохранить пакеты.");
       }
     });
 
@@ -470,6 +660,11 @@ const csrfToken = ensureCsrfToken(Astro.cookies);
   }
 
   .panel.reviews {
+    grid-column: 1 / -1;
+  }
+
+  .panel.settings,
+  .panel.pricing-panel {
     grid-column: 1 / -1;
   }
 
@@ -575,6 +770,26 @@ const csrfToken = ensureCsrfToken(Astro.cookies);
     gap: 12px;
   }
 
+  .settings-form {
+    display: grid;
+    gap: 12px;
+  }
+
+  .settings-form label {
+    display: grid;
+    gap: 6px;
+    font-weight: 500;
+  }
+
+  .settings-form input {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(28, 28, 26, 0.18);
+    padding: 11px 12px;
+    font: inherit;
+    background: #fff;
+  }
+
   .review-form label {
     display: grid;
     gap: 6px;
@@ -590,6 +805,46 @@ const csrfToken = ensureCsrfToken(Astro.cookies);
     padding: 11px 12px;
     font: inherit;
     background: #fff;
+  }
+
+  .pricing-list {
+    display: grid;
+    gap: 16px;
+    margin: 6px 0 16px;
+  }
+
+  .pricing-item {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(28, 28, 26, 0.12);
+    background: rgba(255, 255, 255, 0.78);
+  }
+
+  .pricing-item label {
+    display: grid;
+    gap: 6px;
+    font-weight: 500;
+  }
+
+  .pricing-item input,
+  .pricing-item textarea {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(28, 28, 26, 0.18);
+    padding: 11px 12px;
+    font: inherit;
+    background: #fff;
+  }
+
+  .pricing-item textarea {
+    resize: vertical;
+  }
+
+  .pricing-actions {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .review-form textarea {
