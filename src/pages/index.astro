@@ -10,16 +10,17 @@ import Pricing from "../sections/Pricing.astro";
 import FAQ from "../sections/FAQ.astro";
 import Contact from "../sections/Contact.astro";
 import Footer from "../sections/Footer.astro";
-import { site } from "../data/site";
 import { getAdminData } from "../lib/admin/storage";
+import { mergeSiteData } from "../lib/site";
 
-const adminData = await getAdminData().catch(() => ({ media: [], reviews: [] }));
+const adminData = await getAdminData().catch(() => ({ media: [], reviews: [], settings: null, pricing: [] }));
+const content = mergeSiteData(adminData);
 ---
 
 <BaseLayout title="Ведущая событий">
   <header class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#hero">{site.brand}</a>
+      <a class="brand" href="#hero">{content.brand}</a>
       <nav>
         <a href="#services">Форматы</a>
         <a href="#showreel">Шоу?рил</a>
@@ -30,17 +31,17 @@ const adminData = await getAdminData().catch(() => ({ media: [], reviews: [] }))
   </header>
 
   <main>
-    <Hero />
-    <About />
-    <Services />
+    <Hero site={content} />
+    <About site={content} />
+    <Services site={content} />
     <Showreel media={adminData.media} />
-    <Testimonials reviews={adminData.reviews} />
-    <Process />
-    <Pricing />
-    <FAQ />
-    <Contact />
+    <Testimonials reviews={adminData.reviews} site={content} />
+    <Process site={content} />
+    <Pricing site={content} />
+    <FAQ site={content} />
+    <Contact site={content} />
   </main>
-  <Footer />
+  <Footer site={content} />
 </BaseLayout>
 
 <style>

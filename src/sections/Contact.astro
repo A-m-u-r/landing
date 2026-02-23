@@ -1,6 +1,6 @@
 ﻿---
 import SectionTitle from "../components/SectionTitle.astro";
-import { site } from "../data/site";
+const { site } = Astro.props;
 ---
 <section class="section" id="contact">
   <div class="container">
@@ -42,7 +42,12 @@ import { site } from "../data/site";
           <p>Телефон: {site.phone}</p>
           <p>Email: {site.email}</p>
           <p>География: {site.city}</p>
-          <p>Instagram: {site.instagram}</p>
+          <p>
+            {site.social.label}:{" "}
+            <a href={site.social.url} target="_blank" rel="noopener noreferrer">
+              {site.social.text}
+            </a>
+          </p>
         </div>
         <div class="card">
           <h3>Что дальше?</h3>

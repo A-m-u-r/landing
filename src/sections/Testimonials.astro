@@ -1,9 +1,8 @@
 ﻿---
 import SectionTitle from "../components/SectionTitle.astro";
 import Testimonial from "../components/Testimonial.astro";
-import { site } from "../data/site";
 
-const { reviews = [] } = Astro.props;
+const { reviews = [], site } = Astro.props;
 const display = reviews.length
   ? reviews.map((item) => ({
       name: item.subtitle ? `${item.author}, ${item.subtitle}` : item.author,
