@@ -1,10 +1,14 @@
 ﻿export const site = {
   brand: "Aigul Baimurzina",
   tagline: "Ведущая, которая превращает событие в историю",
-  city: "Москва и МО",
+  city: "Тюменская область",
   phone: "+7 (900) 000-00-00",
   email: "aigul.baimurzina@mail.ru",
-  instagram: "@aigul.host",
+  social: {
+    label: "VK",
+    url: "https://vk.com/aygulyusupova20",
+    text: "vk.com/aygulyusupova20",
+  },
   hero: {
     title: "Ведущая для свадеб, корпоративов и частных событий",
     subtitle:
