@@ -1,0 +1,135 @@
+
+> landing@0.0.1 astro D:\projects\landing-host
+> astro "dev" "--host" "0.0.0.0" "--port" "4321"
+
+[2m21:50:40[22m [34m[@astrojs/node][39m Enabling sessions with filesystem storage
+[2m21:50:40[22m [34m[types][39m Generated [2m1ms[22m
+[2m21:50:40[22m [34m[content][39m Syncing content
+[2m21:50:40[22m [34m[content][39m Synced content
+
+[42m[1m astro [22m[49m [32mv5.17.3[39m [2mready in[22m 164 [2mms[22m
+
+[2m┃[22m Local    [36mhttp://localhost:4321/[39m
+[2m┃[22m Network  [36mhttp://172.18.0.1:4321/[39m
+           [36mhttp://192.168.0.18:4321/[39m
+           [36mhttp://172.31.192.1:4321/[39m
+
+[2m21:50:40[22m [32mwatching for file changes...[39m
+[2m21:50:41[22m [34m[200][39m /admin [2m225ms[22m
+[2m21:50:41[22m [34m[200][39m / [2m101ms[22m
+[2m21:50:41[22m [34m[200][39m /api/admin/content [2m5ms[22m
+[2m21:51:20[22m [34m[200][39m / [2m5ms[22m
+[2m22:06:19[22m [34m[200][39m /admin [2m4ms[22m
+[2m22:06:19[22m [34m[200][39m / [2m10ms[22m
+[2m22:06:19[22m [34m[200][39m /api/admin/content [2m3ms[22m
+[2m22:06:19[22m [34m[200][39m / [2m7ms[22m
+[2m22:07:14[22m [34m[200][39m /admin [2m4ms[22m
+[2m22:07:14[22m [34m[200][39m / [2m6ms[22m
+[2m22:07:14[22m [34m[200][39m /api/admin/content [2m1ms[22m
+[2m22:07:14[22m [34m[200][39m / [2m7ms[22m
+[2m22:09:03[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:09:04[22m [34m[200][39m / [2m38ms[22m
+[2m22:09:04[22m [34m[200][39m /admin [2m7ms[22m
+[2m22:09:04[22m [34m[200][39m / [2m12ms[22m
+[2m22:09:04[22m [34m[200][39m /api/admin/content [2m7ms[22m
+[2m22:09:28[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:09:29[22m [34m[200][39m / [2m29ms[22m
+[2m22:09:29[22m [34m[200][39m /admin [2m8ms[22m
+[2m22:09:29[22m [34m[200][39m / [2m7ms[22m
+[2m22:09:29[22m [34m[200][39m /api/admin/content [2m3ms[22m
+[2m22:09:43[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:09:43[22m [34m[watch][39m src/pages/admin.astro
+[2m22:15:55[22m [34m[watch][39m /src/pages/index.astro?astro&type=style&index=0&lang.css
+[2m22:15:56[22m [34m[200][39m /admin [2m6ms[22m
+[2m22:15:56[22m [34m[200][39m / [2m13ms[22m
+[2m22:15:56[22m [34m[200][39m / [2m6ms[22m
+[2m22:15:56[22m [34m[200][39m /api/admin/content [2m1ms[22m
+[2m22:16:00[22m [34m[watch][39m /src/pages/index.astro?astro&type=style&index=0&lang.css
+[2m22:16:01[22m [34m[200][39m /admin [2m4ms[22m
+[2m22:16:01[22m [34m[200][39m / [2m29ms[22m
+[2m22:16:01[22m [34m[200][39m /api/admin/content [2m20ms[22m
+[2m22:16:01[22m [34m[200][39m / [2m24ms[22m
+[2m22:16:04[22m [34m[watch][39m /src/pages/index.astro?astro&type=style&index=0&lang.css
+[2m22:16:05[22m [34m[200][39m /admin [2m2ms[22m
+[2m22:16:05[22m [34m[200][39m / [2m6ms[22m
+[2m22:16:05[22m [34m[200][39m /api/admin/content [2m2ms[22m
+[2m22:16:05[22m [34m[200][39m / [2m8ms[22m
+[2m22:19:08[22m [34m[watch][39m /src/sections/Hero.astro?astro&type=style&index=0&lang.css
+[2m22:19:09[22m [34m[200][39m /admin [2m4ms[22m
+[2m22:19:09[22m [34m[200][39m / [2m7ms[22m
+[2m22:19:09[22m [34m[200][39m /api/admin/content [2m8ms[22m
+[2m22:19:09[22m [34m[200][39m / [2m9ms[22m
+[2m22:20:24[22m [34m[watch][39m /src/sections/About.astro?astro&type=style&index=0&lang.css
+[2m22:20:24[22m [34m[200][39m /admin [2m3ms[22m
+[2m22:20:24[22m [34m[200][39m / [2m11ms[22m
+[2m22:20:24[22m [34m[200][39m /api/admin/content [2m2ms[22m
+[2m22:20:24[22m [34m[200][39m / [2m15ms[22m
+[2m22:22:58[22m [34m[watch][39m /src/sections/Services.astro?astro&type=style&index=0&lang.css
+[2m22:22:59[22m [34m[200][39m /admin [2m3ms[22m
+[2m22:22:59[22m [34m[200][39m / [2m6ms[22m
+[2m22:22:59[22m [34m[200][39m / [2m12ms[22m
+[2m22:22:59[22m [34m[200][39m /api/admin/content [2m9ms[22m
+[2m22:34:02[22m [34m[watch][39m /src/sections/Process.astro?astro&type=style&index=0&lang.css
+[2m22:34:03[22m [34m[200][39m /admin [2m3ms[22m
+[2m22:34:03[22m [34m[200][39m / [2m7ms[22m
+[2m22:34:03[22m [34m[200][39m / [2m12ms[22m
+[2m22:34:03[22m [34m[200][39m /api/admin/content [2m9ms[22m
+[2m22:34:30[22m [34m[watch][39m /src/sections/Pricing.astro?astro&type=style&index=0&lang.css
+[2m22:34:31[22m [34m[200][39m /admin [2m3ms[22m
+[2m22:34:31[22m [34m[200][39m / [2m11ms[22m
+[2m22:34:31[22m [34m[200][39m /api/admin/content [2m1ms[22m
+[2m22:34:31[22m [34m[200][39m / [2m49ms[22m
+[2m22:37:42[22m [34m[watch][39m /src/sections/FAQ.astro?astro&type=style&index=0&lang.css
+[2m22:37:43[22m [34m[200][39m /admin [2m2ms[22m
+[2m22:37:43[22m [34m[200][39m / [2m11ms[22m
+[2m22:37:43[22m [34m[200][39m /api/admin/content [2m6ms[22m
+[2m22:37:43[22m [34m[200][39m / [2m15ms[22m
+[2m22:37:56[22m [34m[watch][39m /src/sections/Contact.astro?astro&type=style&index=0&lang.css
+[2m22:37:57[22m [34m[200][39m /admin [2m4ms[22m
+[2m22:37:57[22m [34m[200][39m / [2m9ms[22m
+[2m22:37:57[22m [34m[200][39m /api/admin/content [2m2ms[22m
+[2m22:37:57[22m [34m[200][39m / [2m23ms[22m
+[2m22:38:11[22m [34m[watch][39m /src/sections/Footer.astro?astro&type=style&index=0&lang.css
+[2m22:38:12[22m [34m[200][39m /admin [2m4ms[22m
+[2m22:38:12[22m [34m[200][39m / [2m7ms[22m
+[2m22:38:12[22m [34m[200][39m /api/admin/content [2m3ms[22m
+[2m22:38:12[22m [34m[200][39m / [2m15ms[22m
+[2m22:39:50[22m [34m[watch][39m /src/sections/Testimonials.astro?astro&type=style&index=0&lang.css
+[2m22:39:50[22m [34m[200][39m /admin [2m4ms[22m
+[2m22:39:50[22m [34m[200][39m / [2m7ms[22m
+[2m22:39:50[22m [34m[200][39m / [2m9ms[22m
+[2m22:39:50[22m [34m[200][39m /api/admin/content [2m13ms[22m
+[2m22:40:10[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:40:11[22m [34m[200][39m / [2m32ms[22m
+[2m22:40:11[22m [34m[200][39m /admin [2m10ms[22m
+[2m22:40:11[22m [34m[200][39m / [2m6ms[22m
+[2m22:40:11[22m [34m[200][39m /api/admin/content [2m4ms[22m
+[2m22:40:19[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:40:20[22m [34m[200][39m / [2m37ms[22m
+[2m22:40:20[22m [34m[200][39m /admin [2m6ms[22m
+[2m22:40:20[22m [34m[200][39m / [2m11ms[22m
+[2m22:40:25[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:40:26[22m [34m[200][39m / [2m38ms[22m
+[2m22:40:26[22m [34m[200][39m /admin [2m16ms[22m
+[2m22:40:26[22m [34m[200][39m / [2m9ms[22m
+[2m22:40:32[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:40:33[22m [34m[200][39m / [2m38ms[22m
+[2m22:40:33[22m [34m[200][39m /admin [2m15ms[22m
+[2m22:40:33[22m [34m[200][39m / [2m15ms[22m
+[2m22:40:37[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:40:38[22m [34m[200][39m / [2m33ms[22m
+[2m22:40:38[22m [34m[200][39m /admin [2m8ms[22m
+[2m22:40:38[22m [34m[200][39m / [2m12ms[22m
+[2m22:40:44[22m [34m[watch][39m /src/pages/admin.astro?astro&type=style&index=0&lang.css
+[2m22:40:44[22m [34m[200][39m / [2m46ms[22m
+[2m22:40:44[22m [34m[200][39m /admin [2m10ms[22m
+[2m22:40:45[22m [34m[200][39m / [2m4ms[22m
+[2m22:43:51[22m [34m[200][39m /admin [2m6ms[22m
+[2m22:47:09[22m [34m[200][39m / [2m8ms[22m
+[2m22:47:18[22m [33m[302][39m /admin [2m2ms[22m
+[2m22:47:19[22m [34m[200][39m /admin/login [2m3ms[22m
+[2m22:47:27[22m [34m[200][39m [34mPOST[39m /admin/login [2m31ms[22m
+[2m22:47:54[22m [34m[200][39m [34mPOST[39m /admin/login [2m29ms[22m
+[2m22:47:56[22m [34m[200][39m [34mPOST[39m /admin/login [2m31ms[22m
+[2m22:48:12[22m [34m[200][39m / [2m4ms[22m
+[2m22:48:15[22m [34m[200][39m /admin [2m3ms[22m
